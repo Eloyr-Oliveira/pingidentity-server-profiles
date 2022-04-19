@@ -44,7 +44,7 @@
                     "type": "STRING"
                 },
                 {
-                    "stringValue": "ou=oauthClients,dc=example,dc=com",
+                    "stringValue": "ou=oauthClients,${USER_BASE_DN}",
                     "id": "SearchBase",
                     "type": "STRING"
                 }
@@ -84,7 +84,7 @@
                     "type": "STRING"
                 },
                 {
-                    "stringValue": "ou=grants,dc=example,dc=com",
+                    "stringValue": "ou=grants,${USER_BASE_DN}",
                     "id": "SearchBase",
                     "type": "STRING"
                 }
@@ -146,7 +146,7 @@
                     "type": "STRING"
                 },
                 {
-                    "stringValue": "ou=identities,dc=example,dc=com",
+                    "stringValue": "ou=identities,${USER_BASE_DN}",
                     "id": "UserSearchBase",
                     "type": "STRING"
                 },
@@ -184,7 +184,7 @@
                     "type": "STRING"
                 },
                 {
-                    "stringValue": "ou=sessions,dc=example,dc=com",
+                    "stringValue": "ou=sessions,${USER_BASE_DN}",
                     "id": "SearchBase",
                     "type": "STRING"
                 }
@@ -357,10 +357,10 @@
             "operationType": "SAVE",
             "items": [{
                 "federationInfo": {
-                    "saml2EntityId": "https://${PF_ENGINE_BASE_URL}",
+                    "saml2EntityId": "https://${PF_ENGINE_PRIVATE_HOSTNAME}:${PF_ENGINE_PRIVATE_PORT_HTTPS}",
                     "saml1xIssuerId": "localhost:default:entityId",
                     "wsfedRealm": "",
-                    "baseUrl": "https://${PF_ENGINE_BASE_URL}",
+                    "baseUrl": "https://${PF_ENGINE_PRIVATE_HOSTNAME}:${PF_ENGINE_PRIVATE_PORT_HTTPS}",
                     "saml1xSourceId": ""
                 },
                 "contactInfo": {},
@@ -517,7 +517,7 @@
                             },
                             {
                                 "name": "Search Base",
-                                "value": "dc=example,dc=com"
+                                "value": "${USER_BASE_DN}"
                             },
                             {
                                 "name": "Search Filter",
@@ -721,7 +721,7 @@
                         "id": "LDAP-D803C87FAB2ADFB4B0A947B64BA6F0C6093A5CA3"
                     },
                     "type": "LDAP",
-                    "baseDn": "ou=people,dc=example,dc=com",
+                    "baseDn": "ou=people,${USER_BASE_DN}",
                     "dataStoreMapping": {
                         "entryUUID": {
                             "metadata": {},
@@ -1893,8 +1893,10 @@
         {
             "operationType": "SAVE",
             "items": [{
-                "apiEnabled": false,
-                "enableApiDescriptions": true
+                "apiEnabled": true,
+                "enableApiDescriptions": true,
+                "restrictAccessToRedirectlessMode": false,
+                "includeRequestContext": false
             }],
             "resourceType": "/authenticationApi/settings"
         },
